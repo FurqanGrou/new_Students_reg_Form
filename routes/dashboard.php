@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\FavoriteTimeController;
 use App\Http\Controllers\Dashboard\CouponController;
+use App\Http\Controllers\Dashboard\ImportExportController;
+use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\TranslateController;
+use App\Http\Controllers\Dashboard\ConfigController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +52,25 @@ Route::group(['middleware' => [ 'web' => 'auth:admin' ], 'as' => 'dashboard.'], 
     Route::put('/coupons/{id}/update', [CouponController::class, 'update'])->name('coupons.update');
     Route::delete('/coupons/destroy/{id}', [CouponController::class, 'destroy'])->name('coupons.destroy');
     Route::get('/coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+
+    Route::get('/importStudents', [ImportExportController::class, 'showImportStudents'])->name('import.students.show');
+    Route::post('/importStudents', [ImportExportController::class, 'importStudents'])->name('import.students.store');
+
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+    Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+    Route::get('/language_translate/{local}', [TranslateController::class, 'show_translate'])->name('show_translate');
+    Route::post('/languages/key_value_store', [TranslateController::class, 'key_value_store'])->name('languages.key_value_store');
+
+    Route::get('/export-subscribes', [ImportExportController::class, 'exportSubscribes'])->name('export.subscribes');
+    Route::get('/export-text-old', [ImportExportController::class, 'exportOldSubscribes'])->name('export.old.subscribes');
+    Route::get('/export-text-new', [ImportExportController::class, 'exportNewSubscribes'])->name('export.new.subscribes');
+
+    // change time table
+    Route::get('/change-time-table', [ConfigController::class, 'createTimeTable'])->name('config.createTimeTable');
+    Route::post('/change-time-table', [ConfigController::class, 'storeTimeTable'])->name('config.storeTimeTable');
 
 });

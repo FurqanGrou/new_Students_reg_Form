@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use App\Models\Country;
+use App\Models\Course;
 use App\Models\FavoriteTime;
 use App\Models\Student;
 use App\Models\Subscribe;
@@ -10,8 +12,11 @@ use App\Service\Payment\Checkout;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use function GuzzleHttp\json_decode;
 
 class SemesterRegistrationController extends Controller
@@ -30,6 +35,16 @@ class SemesterRegistrationController extends Controller
     }
 
     public function indexOneToOne()
+    {
+
+        $countries = Country::query()->where('lang', '=', App::getLocale())->get();
+        $course = Course::query()->where('code', '=', 'new-students')->first();
+        $time_table_image = Storage::url(Config::getValue('time_table_image_' . app()->getLocale()));
+
+        return view('one-to-one', ['countries' => $countries, 'course' => $course, 'time_table_image' => $time_table_image]);
+    }
+
+    public function thankYouPage()
     {
         if(request()->query('cko-session-id')){
             $client = new Client(['base_uri' => $this->payment_link]);
@@ -64,18 +79,22 @@ class SemesterRegistrationController extends Controller
                 }else{
                     session()->flash('error', __('resubscribe.Payment failed'));
                 }
-
-                return redirect()->route('semester.indexOneToOne');
             }catch (\GuzzleHttp\Exception\ClientException $e) {
 //                $response = $e->getResponse();
                 session()->flash('error', __('resubscribe.Payment failed'));
-                return redirect()->route('semester.indexOneToOne');
             }
         }
 
         $countries = Country::query()->where('lang', '=', App::getLocale())->get();
+        $favorite_times_male = FavoriteTime::query()->where('section',  '=', 'male')->get();
+        $favorite_times_female = FavoriteTime::query()->where('section',  '=', 'female')->get();
+        $course = Course::query()->where('code',  '=', 'one_to_one')->first();
 
-        return view('one-to-one', ['countries' => $countries]);
+        if (! (session('error') || session('success')) ) {
+            return redirect()->route('semester.indexOneToOne');
+        }
+
+        return view('thank-you', ['countries' => $countries, 'favorite_times_male' => $favorite_times_male , 'favorite_times_female' => $favorite_times_female, 'course' => $course]);
     }
 
     public function getStudentInfo()

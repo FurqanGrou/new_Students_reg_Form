@@ -80,7 +80,8 @@ class RegisterController extends Controller
 
         if ($request->payment_method == 'hsbc'){
             $request->validate([
-                'money_transfer_image_path' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
+                // 'money_transfer_image_path' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
+                'money_transfer_image_path' => 'required',
                 'bank_name'     => 'required|string',
                 'account_owner' => 'required|string',
                 'transfer_date' => 'required|date',
@@ -118,16 +119,17 @@ class RegisterController extends Controller
                 ->first();
 
             if (is_null($student)){
-                session()->flash('error', __('resubscribe.The student ID is not in our records'));
+                Session::flash('error', __('resubscribe.The student ID is not in our records'));
                 return redirect()->route('semester.indexOneToOne');
             }
 
             if ($student->status == 1){
-                session()->flash('error', __('one-to-one.Sorry just'));
+                Session::flash('error', __('one-to-one.Sorry just'));
                 return redirect()->route('semester.indexOneToOne');
             }
 
             Session::put('student_id', $student->id);
+            Session::put('student_type', 'stopped_student');
             $course = Course::query()->where('code', 'new-students')->first();
             $amount = $course->amount;
 
@@ -153,8 +155,8 @@ class RegisterController extends Controller
                 'place_birth' => $request->place_birth_studied,
                 'address' => $request->address_studied,
                 'id_number' => $request->id_number_studied,
-                'father_whatsApp_number' => $request->father_whatsApp_number_studied,
-                'mother_whatsApp_number' => $request->mother_whatsApp_number_studied,
+                'father_whatsApp_number' => $request->father_whatsApp_studied . ' ' . $request->father_whatsApp_number_studied,
+                'mother_whatsApp_number' => $request->mother_whatsApp_studied . ' ' . $request->mother_whatsApp_number_studied,
                 'father_email' => $request->father_email_studied,
                 'mother_email' => $request->mother_email_studied,
                 'preferred_language' => $request->preferred_language_studied,
@@ -189,11 +191,11 @@ class RegisterController extends Controller
                     return Redirect::to($redirection);
                 }else{
                     if ($result->approved){
-                        session()->flash('success', __('resubscribe.The registration process has been completed successfully'));
+                        Session::flash('success', __('resubscribe.The registration process has been completed successfully'));
                     }else{
-                        session()->flash('error', __('resubscribe.Payment failed!'));
+                        Session::flash('error', __('resubscribe.Payment failed!'));
                     }
-                    return redirect()->route('semester.indexOneToOne');
+                    return redirect()->route('semester.thankYouPage');
                 }
 
             }else{
@@ -211,9 +213,10 @@ class RegisterController extends Controller
                 ]);
             }
 
-            session()->flash('success', __('resubscribe.The registration process has been completed successfully'));
-            return redirect()->route('semester.indexOneToOne');
+            Session::flash('success', __('resubscribe.The registration process has been completed successfully'));
+            return redirect()->route('semester.thankYouPage');
         }else{
+
             $request->validate([
                 'study_before' => 'required|string',
                 'favorite_time' => 'required|string',
@@ -243,8 +246,11 @@ class RegisterController extends Controller
                 'quran_school' => 'required|string',
                 'studied_qaeedah' => 'required|string',
                 'guardian_commitment' => 'required|string',
-                'student_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
-                'guardian_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
+                'student_id' => 'required',
+                'guardian_id' => 'required',
+                'hear_about' => 'required',
+                // 'student_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
+                // 'guardian_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
             ]);
 
             if ($request->social_situation == 'other'){
@@ -268,8 +274,8 @@ class RegisterController extends Controller
                 'place_birth' => $request->place_birth,
                 'address' => $request->address,
                 'id_number' => $request->id_number,
-                'father_whatsApp_number' => $request->father_whatsApp_number,
-                'mother_whatsApp_number' => $request->mother_whatsApp_number,
+                'father_whatsApp_number' => $request->father_whatsApp . ' ' . $request->father_whatsApp_number,
+                'mother_whatsApp_number' => $request->mother_whatsApp . ' ' . $request->mother_whatsApp_number,
                 'father_email' => $request->father_email,
                 'mother_email' => $request->mother_email,
                 'preferred_language' => $request->preferred_language,
@@ -279,6 +285,7 @@ class RegisterController extends Controller
                 'mother_work' => $request->mother_work,
                 'social_situation' => $social_situation,
                 'current_disease' => $request->current_disease,
+                'hear_about' => implode(' - ', $request->hear_about) . ($request->hear_about_textbox ? " - $request->hear_about_textbox" : ""),
                 'name_school' => $request->name_school,
                 'studied_qaeedah' => $request->studied_qaeedah == 'yes' ? '1' : '0',
                 'student_id_image' => $request->file('student_id')->store('public/new_students'),
@@ -288,8 +295,21 @@ class RegisterController extends Controller
             if ($request->payment_method == 'checkout_gateway') {
 
                 Session::put('student_id', $newStudent->id);
+                Session::put('student_type', 'new_student');
                 $course = Course::query()->where('code', 'new-students')->first();
                 $amount = $course->amount;
+
+                if (isset($request->hidden_apply_coupon) && !empty($request->hidden_apply_coupon)){
+                    $coupon_code = $request->hidden_apply_coupon;
+                    $coupon = Coupon::where('code', $coupon_code)->where('course_id', $course->id)->first();
+
+                    if (@$coupon->is_valid){
+                        $discount    = $coupon->getDiscount($course->amount);
+                        $base_amount = $course->amount;
+                        $amount = ($base_amount - $discount);
+                        $coupon->use($newStudent->id, 1);
+                    }
+                }
 
                 $student_name = $request->first_name . ' ' . $request->father_name . ' ' . $request->grandfather_name . ' ' . $request->family_name;
 
@@ -321,11 +341,11 @@ class RegisterController extends Controller
                     return Redirect::to($redirection);
                 }else{
                     if ($result->approved){
-                        session()->flash('success', __('resubscribe.The registration process has been completed successfully'));
+                        Session::flash('success', __('resubscribe.The registration process has been completed successfully'));
                     }else{
-                        session()->flash('error', __('resubscribe.Payment failed!'));
+                        Session::flash('error', __('resubscribe.Payment failed!'));
                     }
-                    return redirect()->route('semester.indexOneToOne');
+                    return redirect()->route('semester.thankYouPage');
                 }
 
             }else{
@@ -343,8 +363,8 @@ class RegisterController extends Controller
                 ]);
             }
 
-            session()->flash('success', __('resubscribe.The registration process has been completed successfully'));
-            return redirect()->route('semester.indexOneToOne');
+            Session::flash('success', __('resubscribe.The registration process has been completed successfully'));
+            return redirect()->route('semester.thankYouPage');
         }
         // =========================================
     }

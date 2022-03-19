@@ -11,61 +11,28 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('dashboard.favorite-times.index') }}">
-                    <i class="ft ft-clock"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">الأوقات المفضلة</span>
+                <a href="{{ route('dashboard.show_translate', 'en') }}">
+                    <i class="fa fa-comments"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">ترجمة النصوص الانجليزية</span>
                 </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('dashboard.favorite-times.index') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft ft-clock"></i>
-                            عرض جميع الأوقات
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dashboard.favorite-times.create') }}">
-                    <i class="ft ft-edit"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">اضافة وقت جديد</span>
+                <a href="{{ route('dashboard.show_translate', 'ar') }}">
+                    <i class="fa fa-comments"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">ترجمة النصوص العربية</span>
                 </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('dashboard.favorite-times.create') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft ft-clock"></i>
-                            عرض جميع الأوقات
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('dashboard.coupons.index') }}">
-                    <i class="ft ft-percent"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">الكوبونات</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('dashboard.coupons.index') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft ft-percent"></i>
-                            عرض جميع الكوبونات
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dashboard.coupons.create') }}">
-                    <i class="ft ft-plus-circle"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">اضافة كوبون جديد</span>
+                <a href="{{ route('dashboard.config.createTimeTable') }}">
+                    <i class="fa fa-camera"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">تحديث صورة الأزمنة</span>
                 </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('dashboard.coupons.create') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft plus-circle"></i>
-                            عرض جميع الكوبونات
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('dashboard.import.students.show') }}">
+                    <i class="fa fa-upload"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">تحديث بيانات الطلاب</span>
+                </a>
             </li>
 
         </ul>
