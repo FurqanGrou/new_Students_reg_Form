@@ -20,6 +20,7 @@ class Subscribe extends Model
     public static function booted()
     {
         static::created(function($subscribe) {
+
             if ( ($subscribe->payment_method == 'checkout_gateway' && is_numeric($subscribe->response_code) && in_array($subscribe->payment_status, ['Captured', 'Authorized'])) || $subscribe->payment_method == 'hsbc') {
 
                 $created_at = Carbon::parse($subscribe->created_at)->timezone('Asia/Riyadh')->format('Y-m-d H:i:s');
@@ -76,17 +77,17 @@ class Subscribe extends Model
                         $image_path ?? '-', $subscribe->account_owner ?? '-', $subscribe->transfer_date ?? '-', $subscribe->bank_reference_number ?? '-',
                         $subscribe->bank_name ?? '-', $subscribe->{$relation}->country->code ?? '-', $subscribe->{$relation}->residenceCountry->name ?? '-',
                         $subscribe->{$relation}->city ?? '-', $subscribe->{$relation}->address ?? '-', $subscribe->{$relation}->postal_code ?? '-',
-                        $subscribe->{$relation}->place_birth ?? '-',
+                        '',
                         $subscribe->{$relation}->id_number ?? '-', $subscribe->{$relation}->father_whatsApp_number ?? '-',
                         $subscribe->{$relation}->mother_whatsApp_number ?? '-', $subscribe->{$relation}->father_email ?? '-',
                         $subscribe->{$relation}->mother_email ?? '-',
-                        $subscribe->{$relation}->preferred_language ?? '-', $subscribe->{$relation}->guardian_name ?? '-',
-                        $subscribe->{$relation}->guardian_work ?? '-', $subscribe->{$relation}->mother_name ?? '-',
-                        $subscribe->{$relation}->mother_work ?? '-', $subscribe->{$relation}->social_situation ?? '-',
-                        is_null($subscribe->{$relation}->current_disease) ? 'لا' : 'نعم', $subscribe->{$relation}->current_disease ?? '-',
-                        is_null($subscribe->{$relation}->name_school) ? 'لا' : 'نعم', $subscribe->{$relation}->name_school ?? '-',
-                        is_null($subscribe->{$relation}->studied_qaeedah) ? 'لا' : 'نعم',
-                        $student_id_image ?? '-', $guardian_id_image ?? '-',
+                        $subscribe->{$relation}->preferred_language ?? '-', '',
+                        '', '',
+                        '', '',
+                        '', '',
+                        '', '',
+                        '',
+                        $student_id_image ?? '-', '',
                         $subscribe->{$relation}->residenceCountry->code ?? '-', $price, $subscribe->id, $subscribe->{$relation}->hear_about ?? '-'
                     ],
                 ];
@@ -95,6 +96,7 @@ class Subscribe extends Model
 
                 Notification::route('mail', [$subscribe->email])->notify(new SubscribeNotification($subscribe));
             }
+
         });
 
         static::updated(function($subscribe) {
@@ -154,17 +156,17 @@ class Subscribe extends Model
                             $image_path ?? '-', $subscribe->account_owner ?? '-', $subscribe->transfer_date ?? '-', $subscribe->bank_reference_number ?? '-',
                             $subscribe->bank_name ?? '-', $subscribe->{$relation}->country->code ?? '-', $subscribe->{$relation}->residenceCountry->name ?? '-',
                             $subscribe->{$relation}->city ?? '-', $subscribe->{$relation}->address ?? '-', $subscribe->{$relation}->postal_code ?? '-',
-                            $subscribe->{$relation}->place_birth ?? '-',
+                            '',
                             $subscribe->{$relation}->id_number ?? '-', $subscribe->{$relation}->father_whatsApp_number ?? '-',
                             $subscribe->{$relation}->mother_whatsApp_number ?? '-', $subscribe->{$relation}->father_email ?? '-',
                             $subscribe->{$relation}->mother_email ?? '-',
-                            $subscribe->{$relation}->preferred_language ?? '-', $subscribe->{$relation}->guardian_name ?? '-',
-                            $subscribe->{$relation}->guardian_work ?? '-', $subscribe->{$relation}->mother_name ?? '-',
-                            $subscribe->{$relation}->mother_work ?? '-', $subscribe->{$relation}->social_situation ?? '-',
-                            is_null($subscribe->{$relation}->current_disease) ? 'لا' : 'نعم', $subscribe->{$relation}->current_disease ?? '-',
-                            is_null($subscribe->{$relation}->name_school) ? 'لا' : 'نعم', $subscribe->{$relation}->name_school ?? '-',
-                            is_null($subscribe->{$relation}->studied_qaeedah) ? 'لا' : 'نعم',
-                            $student_id_image ?? '-', $guardian_id_image ?? '-',
+                            $subscribe->{$relation}->preferred_language ?? '-', '',
+                            '', '',
+                            '', '',
+                            '', '',
+                            '', '',
+                            '',
+                            $student_id_image ?? '-', '',
                             $subscribe->{$relation}->residenceCountry->code ?? '-', $price, $subscribe->id, $subscribe->{$relation}->hear_about ?? '-'
                         ],
                     ];
@@ -174,6 +176,7 @@ class Subscribe extends Model
                     Notification::route('mail', [$subscribe->email])->notify(new SubscribeNotification($subscribe));
                 }
             }
+
         });
 
     }

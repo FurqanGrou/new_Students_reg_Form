@@ -126,7 +126,7 @@
             cursor: pointer;
             padding: 10px 5px;
             margin: 10px 0px 10px 5px;
-            float: right
+            border-radius: 5px;
         }
 
         #msform .action-button:hover,
@@ -144,8 +144,9 @@
             cursor: pointer;
             padding: 10px 5px;
             margin: 10px 5px 10px 0px;
-            float: right
-        }
+            border-radius: 5px;
+        {{ app()->getLocale() == 'en' ? 'margin-right: 45% !important;' : 'margin-left: 45% !important;' }}
+}
 
         #msform .action-button-previous:hover,
         #msform .action-button-previous:focus {
@@ -389,6 +390,7 @@
     </script>
 
 </head>
+
 <body>
 
 <header class="justify-content-between flex-row-reverse">
@@ -403,7 +405,9 @@
         @endforeach
     </ul>
 
-    <a href="https://eservices.fg2020.com/" target="_blank"><img src="https://eservices.fg2020.com/assets/images/nlogo.png" alt="" width="163" height="50"></a>
+    <a href="https://eservices.fg2020.com/" target="_blank">
+        <img src="https://eservices.fg2020.com/assets/images/nlogo.png" alt="" width="163" height="50">
+    </a>
 </header>
 
 <div class="container-fluid">
@@ -482,25 +486,10 @@
 
     <div id="cover-bg"></div>
 
-    {{--    <nav class="navbar navbar-expand-lg navbar-light bg-light">--}}
-    {{--        <div class="navbar-collapse" id="change-langs">--}}
-    {{--            <ul class="navbar-nav m-auto">--}}
-    {{--                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
-    {{--                    <li class="nav-item active">--}}
-    {{--                        <a class="nav-link"--}}
-    {{--                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"> {{ $properties['native'] }}--}}
-    {{--                            <span class="sr-only">(current)</span>--}}
-    {{--                        </a>--}}
-    {{--                    </li>--}}
-    {{--                @endforeach--}}
-    {{--            </ul>--}}
-    {{--        </div>--}}
-    {{--    </nav>--}}
-
     <div class="alert alert-danger d-none" id="support-cookies" style="text-align: center;font-weight: bold;">{!! __('Support Cookies') !!}</div>
 
     <div class="row justify-content-center">
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mb-2">
+        <div class="col-11 col-sm-9 col-md-6 text-center p-0 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                 <h2 id="heading">{{ __('Page Title') }}</h2>
 
@@ -529,171 +518,20 @@
                                 </div>
                             </div>
 
-                            <p class="rtl-text">
+                            <p class="text-center">
+
+                                <span class="font-weight-bold">{!! __('Enroll now in this semester for') !!} {{ $course->price . '$' }} {!! __('a one-time fee of $50 for course materials') !!}</span>
+
+                                <br>
+                                <span class="font-weight-bold">{!! __('Please note that the current semester ends on') !!}</span>
+
+                                <br>
+                                <br>
+
                                 <span class="text-center d-block w-100 font-weight-bold">{!! __('Learning System') !!}</span>
                                 <span class="text-center d-block w-100 font-weight-bold">{!! __('Click here') !!}</span>
 
-                                <br>
-
-                                <span>{!! __('Enroll now in this semester for') !!} {{ $course->price . '$' }} {!! __('a one-time fee of $50 for course materials') !!}</span>
-
-                                <br>
-
-                                <span>{!! __('Please note that the current semester ends on') !!}</span>
-
-                                <br>
-                                <br>
-
-                                <span style="display: block; color: #008000; font-weight: bold; text-align: center !important;">
-                                    {!! __('Questions') !!}
-                                </span>
-
-                                <br>
-
-                                <span class="d-block text-center font-weight-bold" style="color: #ff0000;">{{ __('Times') }}</span>
-
-                            <ul class="rtl-text" id="times">
-                                <li>{{ __('Mecca time') }}</li>
-                                <li>{{ __('Morocco and France time') }}</li>
-                                <li>{{ __('New York time') }}</li>
-                            </ul>
-
                             </p>
-
-                            <div id="accordion">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                {{ __('Why Al-Furqan Group?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('Why Al-Furqan Group text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                {{ __('What is quality assurance?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What is quality assurance text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                {{ __('What educational paths are available?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What educational paths are available text')  !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingFour">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                {{ __('How do I choose the right path for me or my child?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('How do I choose the right path for me or my child text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingFive">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                {{ __('What categories and ages can register?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What categories and ages can register text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingSix">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                {{ __('What are the school times and days?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What are the school times and days text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingSeven">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                {{ __('What are the tuition fees?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What are the tuition fees text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingEight">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                {{ __('What is the registration method? When will the student start studying?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('What is the registration method? When will the student start studying text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-header" id="headingNine">
-                                        <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                                {{ __('I need more details, how do I contact you?') }}
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
-                                        <div class="card-body">
-                                            {!! __('I need more details, how do I contact you text') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br>
-
-                            <span class="text-center d-block">{{ __('wish') }}</span>
 
                             <div id="signature-section">
                                 <label for="signature-label" class="text-right w-100 label-right" style="color: #ff0000 !important;">{{ __('Guardian Signature') }}:</label>
@@ -707,7 +545,10 @@
 
                         </div>
 
-                        <input type="button" name="next" class="next action-button" value="{{ __('resubscribe.Next') }}" />
+                        <button type="button" name="next" class="next action-button">
+                            {{ __('resubscribe.Next') }}
+                            <i class="fa {{ app()->getLocale() == 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'  }} " aria-hidden="true"></i>
+                        </button>
                     </fieldset>
 
                     <fieldset>
@@ -735,41 +576,7 @@
                                 </div>
                             </div>
 
-                            <div id="study_before_student" class="d-none">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text" for="std-section">{{ __('resubscribe.Section') }}</label>
-                                    </div>
-                                    <select class="custom-select" name="section" id="std-section">
-                                        <option selected>{{ __('resubscribe.Choose') }}...</option>
-                                        <option value="1">{{ __('resubscribe.Male') }}</option>
-                                        <option value="2">{{ __('resubscribe.Female') }}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group text-right">
-                                    <label for="std-number" class="text-right">{{ __('resubscribe.Serial Number') }}</label>
-                                    <input type="number" min="0" name="student_number" class="form-control" id="std-number" placeholder="{{ __('resubscribe.Serial Number') }}">
-                                </div>
-
-                                <div class="form-group text-center">
-                                    <p class="text-center" style="font-size: 13px;color: black;">{{ __('Email Serial Number') }}</p>
-                                </div>
-
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary w-50" id="std-number-search">{{ __('resubscribe.Search') }}</button>
-                                </div>
-
-                                <div class="form-group text-right" id="std-name-section">
-                                    <div class="alert alert-danger d-none" role="alert">
-                                    </div>
-                                    <label for="std-name" class="text-right">{{ __('resubscribe.Name') }} *</label>
-                                    <input type="text" min="0" name="student_name" class="form-control" id="std-name" placeholder="..." readonly>
-                                </div>
-
-                            </div>
-
-                            <img src="{{ url($time_table_image) }}" style="width: 100%;" alt="Time Table">
+                            <img src="{{ url($time_table_image) }}" style="width: 90%; margin: auto !important;" alt="Time Table">
 
                             <div id="favorite_times">
                                 <label for="std-email-conf" class="text-right w-100 label-right">{{ __('Choose your preferred schedule') }}</label>
@@ -805,6 +612,40 @@
                                 </div>
                             </div>
 
+                            <div id="study_before_student" class="d-none">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="std-section">{{ __('gender') }}</label>
+                                    </div>
+                                    <select class="custom-select" name="section" id="std-section">
+                                        <option selected>{{ __('resubscribe.Choose') }}...</option>
+                                        <option value="1">{{ __('Male') }}</option>
+                                        <option value="2">{{ __('Female') }}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <label for="std-number" class="text-right">{{ __('resubscribe.Serial Number') }}</label>
+                                    <input type="number" min="0" name="student_number" class="form-control" id="std-number" placeholder="{{ __('resubscribe.Serial Number') }}">
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <p class="text-center" style="font-size: 13px;color: black;">{{ __('Email Serial Number') }}</p>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <button type="button" class="btn btn-primary w-50" id="std-number-search">{{ __('resubscribe.Search') }}</button>
+                                </div>
+
+                                <div class="form-group text-right" id="std-name-section">
+                                    <div class="alert alert-danger d-none" role="alert">
+                                    </div>
+                                    <label for="std-name" class="text-right">{{ __('resubscribe.Name') }} *</label>
+                                    <input type="text" min="0" name="student_name" class="form-control" id="std-name" placeholder="..." readonly>
+                                </div>
+
+                            </div>
+
                             <br>
 
                             {{-- yes studied (already_studied)--}}
@@ -837,19 +678,16 @@
                                         <label for="postal_code">{{ __('Postal code') }}</label>
                                         <input type="text" name="postal_code_studied" id="postal_code" class="form-control" placeholder="{{ __('Postal code') }}">
                                     </div>
-                                    <div class="col-4 text-right">
-                                        <label for="place_birth">{{ __('Place of birth') }}</label>
-                                        <input type="text" name="place_birth_studied" id="place_birth" class="form-control" placeholder="{{ __('Place of birth') }}">
-                                    </div>
+
                                     <div class="col-4 text-right">
                                         <label for="address">{{ __('Address - Street - Building') }}</label>
                                         <textarea type="text" name="address_studied" id="address" class="form-control"></textarea>
                                     </div>
-                                    <div class="col-6 text-right">
+                                    <div class="col-4 text-right">
                                         <label for="id_number">{{ __('ID/Passport Number') }}</label>
                                         <input type="text" name="id_number_studied" class="form-control" placeholder="{{ __('ID/Passport Number') }}">
                                     </div>
-                                    <p class="text-center" style="color: #ff0000;">{{ __('sure the address is correct') }}</p>
+                                    <p class="text-center w-100" style="color: #ff0000;">{{ __('sure the address is correct') }}</p>
                                 </div>
 
                                 <br>
@@ -889,13 +727,16 @@
 
                                     <br>
 
-                                    <div class="col-6 text-right">
+                                    <div class="col-6 text-right mt-2">
                                         <label for="father_email">{{ __('Father’s E-mail') }}</label>
                                         <input type="email" name="father_email_studied" id="father_email" class="form-control" placeholder="{{ __('Father’s E-mail') }}">
                                         <input type="email" name="confirm_father_email_studied" id="confirm_father_email" class="form-control" placeholder="{{ __('Confirm Father’s E-mail') }}">
                                     </div>
-                                    <div class="col-6 text-right">
-                                        <label for="mother_email" style="font-size: 15px;">{{ __('Mother’s E-mail') }}</label>
+
+                                    <br>
+
+                                    <div class="col-6 text-right mt-2">
+                                        <label for="mother_email">{{ __('Mother’s E-mail') }}</label>
                                         <input type="email" name="mother_email_studied" id="mother_email" class="form-control" placeholder="{{ __('Mother’s E-mail') }}">
                                         <input type="email" name="confirm_mother_email_studied" id="confirm_mother_email" class="form-control" placeholder="{{ __('Confirm Mother’s E-mail') }}">
                                     </div>
@@ -924,12 +765,12 @@
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text" for="std-section">{{ __('resubscribe.Section') }}</label>
+                                        <label class="input-group-text" for="std-section">{{ __('gender') }}</label>
                                     </div>
                                     <select class="custom-select" name="new_student_section" id="new_student_section">
                                         <option selected>{{ __('resubscribe.Choose') }}...</option>
-                                        <option value="1">{{ __('resubscribe.Male') }}</option>
-                                        <option value="2">{{ __('resubscribe.Female') }}</option>
+                                        <option value="1">{{ __('Male') }}</option>
+                                        <option value="2">{{ __('Female') }}</option>
                                     </select>
                                 </div>
 
@@ -982,19 +823,16 @@
                                         <label for="postal_code">{{ __('Postal code') }}</label>
                                         <input type="text" name="postal_code" id="postal_code" class="form-control" placeholder="{{ __('Postal code') }}">
                                     </div>
-                                    <div class="col-4 text-right">
-                                        <label for="place_birth">{{ __('Place of birth') }}</label>
-                                        <input type="text" name="place_birth" id="place_birth" class="form-control" placeholder="{{ __('Place of birth') }}">
-                                    </div>
+
                                     <div class="col-4 text-right">
                                         <label for="address">{{ __('Address - Street - Building') }}</label>
                                         <textarea type="text" name="address" id="address" class="form-control"></textarea>
                                     </div>
-                                    <div class="col-6 text-right">
+                                    <div class="col-4 text-right">
                                         <label for="id_number">{{ __('ID/Passport Number') }}</label>
                                         <input type="text" name="id_number" class="form-control" placeholder="{{ __('ID/Passport Number') }}">
                                     </div>
-                                    <p class="text-center" style="color: #ff0000;">{{ __('sure the address is correct') }}</p>
+                                    <p class="text-center w-100" style="color: #ff0000;">{{ __('sure the address is correct') }}</p>
                                 </div>
 
                                 <br>
@@ -1036,12 +874,14 @@
 
                                     <br>
 
-                                    <div class="col-6 text-right">
+                                    <div class="col-6 text-right mt-2">
                                         <label for="father_email">{{ __('Father’s E-mail') }}</label>
                                         <input type="email" name="father_email" id="father_email" class="form-control" placeholder="{{ __('Father’s E-mail') }}">
                                         <input type="email" name="confirm_father_email" id="confirm_father_email" class="form-control" placeholder="{{ __('Confirm Father’s E-mail') }}">
                                     </div>
-                                    <div class="col-6 text-right">
+
+                                    <br>
+                                    <div class="col-6 text-right mt-2">
                                         <label for="mother_email" style="font-size: 15px;">{{ __('Mother’s E-mail') }}</label>
                                         <input type="email" name="mother_email" id="mother_email" class="form-control" placeholder="{{ __('Mother’s E-mail') }}">
                                         <input type="email" name="confirm_mother_email" id="confirm_mother_email" class="form-control" placeholder="{{ __('Confirm Mother’s E-mail') }}">
@@ -1058,71 +898,6 @@
                                             <option value="Arabic">{{ __('Arabic') }}</option>
                                             <option value="English">{{ __('English') }}</option>
                                         </select>
-                                    </div>
-
-                                </div>
-
-                                <hr>
-
-                                <div class="row">
-                                    <div class="col-6 text-right">
-                                        <label for="guardian_name">{{ __('Guardian’s name') }}</label>
-                                        <input type="text" name="guardian_name" id="guardian_name" class="form-control" placeholder="{{ __('Guardian’s name') }}">
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <label for="guardian_work">{{ __('Guardian’s work') }}</label>
-                                        <input type="text" name="guardian_work" id="guardian_work" class="form-control" placeholder="{{ __('Guardian’s work') }}">
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <label for="mother_name">{{ __('Mother’s name') }}</label>
-                                        <input type="text" name="mother_name" id="mother_name" class="form-control" placeholder="{{ __('Mother’s name') }}">
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <label for="mother_work">{{ __('Mother’s work') }}</label>
-                                        <input type="text" name="mother_work" id="mother_work" class="form-control" placeholder="{{ __('Mother’s work') }}">
-                                    </div>
-
-                                </div>
-
-                                <hr>
-
-                                <div class="row">
-
-                                    <div class="col-6 text-right">
-                                        <label for="social_situation">{{ __('Student’s social situation') }}</label>
-                                        <select name="social_situation" class="form-control" id="social_situation">
-                                            <option selected>{{ __('resubscribe.Choose') }}...</option>
-                                            <option value="{{ __('live with parents') }}">{{ __('live with parents') }}</option>
-                                            <option value="{{ __('live with father') }}">{{ __('live with father') }}</option>
-                                            <option value="{{ __('live with mother') }}">{{ __('live with mother') }}</option>
-                                            <option value="other">{{ __('other') }}</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-6 text-right d-none" id="other-social-situation-section">
-                                        <label for="other_social_situation">{{ __('Student’s social situation') }}</label>
-                                        <input type="text" name="other_social_situation" id="other_social_situation" class="form-control" placeholder="{{ __('Student’s social situation') }}">
-                                    </div>
-
-                                    <div class="col-6 text-right">
-                                        <label class="text-right w-100 label-right">{{ __('Has he/she any chronic disease?') }}</label>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="chronic_disease" id="chronic_disease_yes" value="yes">
-                                            <label class="form-check-label label-time" for="chronic_disease_yes">
-                                                {{ __('yes') }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="chronic_disease" id="no" value="no">
-                                            <label class="form-check-label label-time" for="chronic_disease_no">
-                                                {{ __('no') }}
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 text-right d-none" id="explain_disease">
-                                        <label for="current_disease">{{ __('Explain the current disease') }}</label>
-                                        <textarea type="text" name="current_disease" class="form-control"></textarea>
                                     </div>
 
                                 </div>
@@ -1160,62 +935,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-6 text-right">
-                                        <label class="text-right w-100 label-right">{{ __('Has the student participated in any Qur’an school?') }}</label>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="quran_school" id="quran_school_yes" value="yes">
-                                            <label class="form-check-label label-time" for="quran_school_yes">
-                                                {{ __('yes') }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="quran_school" id="quran_school_no" value="no">
-                                            <label class="form-check-label label-time" for="quran_school_no">
-                                                {{ __('no') }}
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 text-right d-none" id="name-school-section">
-                                        <label for="name_school">{{ __('Name of the school') }}</label>
-                                        <input type="text" name="name_school" id="name_school" class="form-control" placeholder="{{ __('Name of the school') }}">
-                                    </div>
-
                                     <div class="col-12 text-right">
-                                        <label class="text-right w-100 label-right">{{ __('Has the student studied Qaeedah Nurania?') }}</label>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="studied_qaeedah" id="studied_qaeedah_yes" value="yes">
-                                            <label class="form-check-label label-time" for="studied_qaeedah_yes">
-                                                {{ __('yes') }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group text-right w-100">
-                                            <input class="form-check-input input-time" type="radio" name="studied_qaeedah" id="studied_qaeedah_no" value="no">
-                                            <label class="form-check-label label-time" for="studied_qaeedah_no">
-                                                {{ __('no') }}
-                                            </label>
-                                        </div>
-
-                                        <br>
-                                        <hr>
-
-                                        <p class="text-center" style="color: #ff0000;">{{ __('Required documents') }}</p>
-
-                                        <br>
 
                                         <div class="form-group text-right w-100">
                                             <label class="form-check-label label-time w-100" for="student_id">
                                                 {{ __('Student ID') }}
                                             </label>
                                             <input class="form-check-input input-time" type="file" name="student_id" id="student_id">
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <div class="form-group text-right w-100">
-                                            <label class="form-check-label label-time w-100" for="guardian_id">
-                                                {{ __('Guardian ID') }}
-                                            </label>
-                                            <input class="form-check-input input-time" type="file" name="guardian_id" id="guardian_id">
                                         </div>
 
                                         <br>
@@ -1230,7 +956,7 @@
 
                             </div>
 
-                            <div id="guardian_commitment_section">
+                            <div class="mt-2" id="guardian_commitment_section">
                                 <label class="text-right w-100 label-right" style="color: #ff0000 !important;">{{ __('Guardian Signature') }}:</label>
                                 <div class="form-group text-right">
                                     <input class="form-check-input input-time" type="radio" name="guardian_commitment" id="guardian_commitment">
@@ -1241,8 +967,14 @@
                             </div>
                         </div>
 
-                        <input type="button" name="next" class="next action-button" value="{{ __('resubscribe.Next') }}" />
-                        <input type="button" name="previous" class="previous action-button-previous" value="{{ __('resubscribe.Previous') }}" />
+                        <button type="button" name="previous" class="previous action-button-previous">
+                            <i class="fa {{ app()->getLocale() == 'ar' ? 'fa-arrow-right' : 'fa-arrow-left'  }} " aria-hidden="true"></i>
+                            {{ __('resubscribe.Previous') }}
+                        </button>
+                        <button type="button" name="next" class="next action-button">
+                            {{ __('resubscribe.Next') }}
+                            <i class="fa {{ app()->getLocale() == 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'  }} " aria-hidden="true"></i>
+                        </button>
                     </fieldset>
 
                     <fieldset id="checks-section">
@@ -1276,7 +1008,7 @@
                                 <div class="form-check text-right">
                                     <input class="form-check-input w-auto" type="radio" name="payment_method" id="checkout_gateway" value="checkout_gateway">
                                     <label class="form-check-label mr-4" for="checkout_gateway">
-                                        {!! __('Payment via credit card') !!}
+                                        {!! __('Payment via credit card', ['amount' => $course->price]) !!}
                                     </label>
                                     <img class="text-center d-block" style="width: 38%;margin: auto;margin-top: 9px;" src="{{ asset('card-icons/cards.png') }}" alt="Cards icons">
                                 </div>
@@ -1286,7 +1018,7 @@
                                 <div class="form-check text-right">
                                     <input class="form-check-input w-auto" type="radio" name="payment_method" id="hsbc" value="hsbc">
                                     <label class="form-check-label mr-4" for="hsbc">
-                                        {{ __('HSBC Bank') }}
+                                        {{ __('HSBC Bank', ['amount' => $course->price]) }}
                                     </label>
                                 </div>
 
@@ -1363,11 +1095,17 @@
                         </div>
 
                         <button type="submit" id="submit-main-form" class="btn btn-secondary w-100 mt-2" disabled>{{ __('resubscribe.Send') }}</button>
-                        <input type="button" name="previous" class="previous action-button-previous" value="{{ __('resubscribe.Previous') }}" />
+
+                        <button type="button" name="previous" style="margin: 0 !important; margin-top: 10px;" class="previous action-button-previous">
+                            <i class="fa {{ app()->getLocale() == 'ar' ? 'fa-arrow-right' : 'fa-arrow-left'  }} " aria-hidden="true"></i>
+                            {{ __('resubscribe.Previous') }}
+                        </button>
 
                     </fieldset>
 
                     <input type="hidden" name="hidden_apply_coupon" id="hidden_apply_coupon">
+
+
                 </form>
 
                 <form id="payment-form" method="POST" action="https://merchant.com/charge-card" class="d-none">
@@ -1392,6 +1130,137 @@
                     <p class="error-message text-center"></p>
                     <p class="success-payment-message text-center"></p>
                 </form>
+
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    {{ __('Why Al-Furqan Group?') }}
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('Why Al-Furqan Group text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{ __('What is quality assurance?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What is quality assurance text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    {{ __('What educational paths are available?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What educational paths are available text')  !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    {{ __('How do I choose the right path for me or my child?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('How do I choose the right path for me or my child text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    {{ __('What categories and ages can register?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What categories and ages can register text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingSix">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    {{ __('What are the school times and days?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What are the school times and days text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingSeven">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    {{ __('What are the tuition fees?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What are the tuition fees text') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingEight">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                    {{ __('What is the registration method? When will the student start studying?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('What is the registration method? When will the student start studying text') !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingNine">
+                            <h5 class="mb-0">
+                                <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                    {{ __('I need more details, how do I contact you?') }}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+                            <div class="card-body">
+                                {!! __('I need more details, how do I contact you text') !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -1428,7 +1297,7 @@
 
 <!-- add frames script -->
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
-<script src="{{ asset('app.js') }}?v=79.21"></script>
+<script src="{{ asset('app.js') }}?v=69.25"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -1771,26 +1640,6 @@
         //     $('input[name="mother_whatsApp_number"]').val(" " + $(this).val() + "+");
         // });
 
-        $(document).on('change', 'input[name="chronic_disease"]', function (e) {
-            if($(this).val() == 'no'){
-                $('textarea[name="current_disease"]').removeAttr('required');
-                $('#explain_disease').addClass('d-none');
-            }else{
-                $('textarea[name="current_disease"]').prop('required', true);
-                $('#explain_disease').removeClass('d-none');
-            }
-        });
-
-        $(document).on('change', 'select[name="social_situation"]', function (e) {
-            if($(this).val() == 'other'){
-                $('input[name="other_social_situation"]').prop('required', true);
-                $('#other-social-situation-section').removeClass('d-none');
-            }else{
-                $('input[name="other_social_situation"]').removeAttr('required');
-                $('#other-social-situation-section').addClass('d-none');
-            }
-        });
-
         $(document).on('change', 'input[name="quran_school"]', function (e) {
             if($(this).val() == 'no'){
                 $('input[name="name_school"]').removeAttr('required');
@@ -1812,7 +1661,6 @@
                 $('#not_study_before_student input, #not_study_before_student select').removeAttr('required');
 
                 $('#study_before_student input, #study_before_student select').prop('required', true);
-                $('input[name="other_social_situation"]').removeAttr('required');
                 $(".checkbox-options").removeAttr('required');
             }else{
                 $('#not_study_before_student').removeClass('d-none');
@@ -1824,7 +1672,6 @@
                 $('#not_study_before_student input, #not_study_before_student select').prop('required', true);
 
                 $('#study_before_student input, #study_before_student select').removeAttr('required');
-                $('input[name="other_social_situation"]').removeAttr('required');
                 $(".checkbox-options").removeAttr('required');
             }
 

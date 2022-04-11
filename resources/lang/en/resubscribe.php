@@ -2,9 +2,9 @@
 
 return [
     'Second semester 2022' => 'Second semester 2022',
-    'Information and notes' => 'Information and notes',
-    'Register' => 'Register',
-    'Payment and termination' => 'Payment and termination',
+    'Information and notes' => 'Information & notes',
+    'Register' => 'Registration',
+    'Payment and termination' => 'Payment & termination',
     'Next' => 'Next',
     'Male' => 'Male',
     'Female' => 'Female',
