@@ -86,6 +86,13 @@ class RegisterController extends Controller
                 'account_owner' => 'required|string',
                 'transfer_date' => 'required|date',
                 'bank_reference_number' => 'required|string',
+            ], [
+                'money_transfer_image_path.required' => __('You must attach a copy of the bank transfer'),
+                'bank_name.required' => __('You must enter the name of the bank'),
+                'account_owner.required' => __('You must enter the name of the account holder'),
+                'transfer_date.required' => __('You must enter the date of the transfer'),
+                'transfer_date.date' => __('You must enter the date of the transfer'),
+                'bank_reference_number.required' => __('You must enter the bank transfer reference number'),
             ]);
         }else{
             $request->validate([
@@ -111,6 +118,18 @@ class RegisterController extends Controller
                 'mother_email_studied' => 'required|string',
                 'preferred_language_studied' => 'required|string',
                 'address_studied' => 'required|string',
+            ], [
+                'student_number.required' => __('You must enter the student number'),
+                'section.required' => __('You must choose the gender'),
+                'student_name.required' => __('You must enter the student name'),
+                'nationality_studied.required' => __('You must choose the nationality'),
+                'country_residence_studied.required' => __('You must choose the country residence'),
+                'postal_code_studied.required' => __('You must enter the postal code'),
+                'id_number_studied.required' => __('You must enter the ID number'),
+                'father_whatsApp_number_studied.required' => __('You must enter the primary mobile number'),
+                'mother_email_studied.required' => __('You must enter the alternative mobile number'),
+                'preferred_language_studied.required' => __('You must choose the preferred language'),
+                'address_studied.required' => __('You must enter the address'),
             ]);
 
             $student = Student::query()
@@ -251,6 +270,25 @@ class RegisterController extends Controller
                 'hear_about' => 'required',
                 // 'student_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
                 // 'guardian_id' => 'required|mimes:jpeg,jpg,bmp,gif,svg,webp,png,pdf,doc,docx',
+            ], [
+                'favorite_time.required' => __('You must choose the appropriate time'),
+                'birthdate.required' => __('You must enter the date of birth'),
+                'first_name.required' => __('You must enter the first name'),
+                'father_name.required' => __('You must enter the father name'),
+                'grandfather_name.required' => __('You must enter the grandfather name'),
+                'family_name.required' => __('You must enter the surname'),
+                'nationality.required' => __('You must choose the nationality'),
+                'country_residence.required' => __('You must choose the country residence'),
+                'city.required' => __('You must enter the city'),
+                'postal_code.required' => __('You must enter the postal code'),
+                'hear_about.required' => __('You must choose how you hear about us'),
+                'address.required' => __('You must enter the address'),
+                'id_number.required' => __('You must enter the ID number'),
+                'father_whatsApp_number.required' => __('You must enter the primary mobile number'),
+                'mother_whatsApp_number.required' => __('You must enter the alternative mobile number'),
+                'father_email.required' => __('You must enter the primary email'),
+                'mother_email.required' => __('You must enter the alternative email'),
+                'preferred_language.required' => __('You must choose the preferred language'),
             ]);
 
             $newStudent = NewStudent::query()->create([

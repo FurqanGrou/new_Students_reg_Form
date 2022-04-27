@@ -417,10 +417,10 @@
     <div class="row justify-content-center">
         <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2 id="heading">{{ __('Second semester 2022 - one to one') }}</h2>
+                <h2 id="heading">{{ __('Thank you registration for the second semester') }}</h2>
 
                 <form id="msform" action="{{ route('semester.subscribeOneToOne') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+                    @csrf
 
                 <!-- progressbar -->
                     <ul id="progressbar" class="d-flex flex-row">
