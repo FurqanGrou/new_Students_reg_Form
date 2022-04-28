@@ -35,11 +35,11 @@
             background-color: #25408F !important;
             border-color: #25408F !important;
         }
-        
+
         .label-time {
-            font-size: 15px !important;    
+            font-size: 15px !important;
         }
-        
+
         .input-time {
             width: auto !important;
         }
@@ -600,18 +600,7 @@
                                         {{ __('Evening Session 2 | 07:00 pm - 10:00 pm GMT+3') }}
                                     </label>
                                 </div>
-                                <div class="form-group text-right">
-                                    <input class=" input-time" type="radio" name="favorite_time" id="{{ __('Evening Session 3 | 11:00 pm - 02:00 am GMT+3') }}" value="{{ __('Evening Session 3 | 11:00 pm - 02:00 am GMT+3') }}" required>
-                                    <label class="form-check-label label-time" for="{{ __('Evening Session 3 | 11:00 pm - 02:00 am GMT+3') }}">
-                                        {{ __('Evening Session 3 | 11:00 pm - 02:00 am GMT+3') }}
-                                    </label>
-                                </div>
-                                <div class="form-group text-right">
-                                    <input class=" input-time" type="radio" name="favorite_time" id="{{ __('Evening Session 4 | 02:00 am - 05:00 am GMT+3') }}" value="{{ __('Evening Session 4 | 02:00 am - 05:00 am GMT+3') }}" required>
-                                    <label class="form-check-label label-time" for="{{ __('Evening Session 4 | 02:00 am - 05:00 am GMT+3') }}">
-                                        {{ __('Evening Session 4 | 02:00 am - 05:00 am GMT+3') }}
-                                    </label>
-                                </div>
+
                             </div>
 
                             <div id="study_before_student" class="d-none">
