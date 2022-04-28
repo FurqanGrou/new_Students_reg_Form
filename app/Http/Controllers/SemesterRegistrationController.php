@@ -38,7 +38,7 @@ class SemesterRegistrationController extends Controller
     {
 
         $countries = Country::query()->where('lang', '=', App::getLocale())->get();
-        $course = Course::query()->where('code', '=', 'new-students')->first();
+        $course = Course::query()->where('code', '=', 'new-students-warsh')->first();
         $time_table_image = Storage::url(Config::getValue('time_table_image_' . app()->getLocale()));
 
         return view('one-to-one', ['countries' => $countries, 'course' => $course, 'time_table_image' => $time_table_image]);

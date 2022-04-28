@@ -149,7 +149,7 @@ class RegisterController extends Controller
 
             Session::put('student_id', $student->id);
             Session::put('student_type', 'stopped_student');
-            $course = Course::query()->where('code', 'new-students')->first();
+            $course = Course::query()->where('code', 'new-students-warsh')->first();
             $amount = $course->amount;
 
             if (isset($request->hidden_apply_coupon) && !empty($request->hidden_apply_coupon)){
@@ -328,7 +328,7 @@ class RegisterController extends Controller
 
                 Session::put('student_id', $newStudent->id);
                 Session::put('student_type', 'new_student');
-                $course = Course::query()->where('code', 'new-students')->first();
+                $course = Course::query()->where('code', 'new-students-warsh')->first();
                 $amount = $course->amount;
 
                 if (isset($request->hidden_apply_coupon) && !empty($request->hidden_apply_coupon)){
@@ -357,7 +357,7 @@ class RegisterController extends Controller
                     'payment_id' => Session::get('payment_id'),
                     'reference_number' => Session::get('reference_number'),
                     'payment_status' => Session::get('payment_status'),
-                    'form_type' => 'new-students',
+                    'form_type' => 'new-students-warsh',
                     'response_code' => $result->response_code ?? '-',
                     'coupon_id' => $coupon->id ?? null,
                     'discount_value' => $discount ?? 0.00,
@@ -391,7 +391,7 @@ class RegisterController extends Controller
                     'account_owner' => $request->account_owner,
                     'transfer_date' => $request->transfer_date,
                     'bank_reference_number' => $request->bank_reference_number,
-                    'form_type' => 'new-students',
+                    'form_type' => 'new-students-warsh',
                 ]);
             }
 
