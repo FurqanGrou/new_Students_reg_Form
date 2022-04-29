@@ -46,7 +46,7 @@ class SubscribeNotification extends Notification
             $relation = 'student';
         }
 
-        if ($this->details->form_type == 'new-students'){
+        if ($this->details->form_type == 'new-students-warsh'){
             $relation = 'newStudent';
             $this->details->newStudent['name'] = $this->details->{$relation}->first_name . ' ' . $this->details->{$relation}->father_name . ' ' . $this->details->{$relation}->grandfather_name . ' ' . $this->details->{$relation}->family_name;
         }

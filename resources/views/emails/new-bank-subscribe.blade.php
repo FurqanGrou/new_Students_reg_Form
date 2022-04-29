@@ -30,7 +30,7 @@
         $relation = 'student';
     }
 
-    if ($details->form_type == 'new-students'){
+    if ($details->form_type == 'new-students-warsh'){
         $relation = 'newStudent';
         $details->newStudent['name'] = $details->{$relation}->first_name . ' ' . $details->{$relation}->father_name . ' ' . $details->{$relation}->grandfather_name . ' ' . $details->{$relation}->family_name;
         $details->newStudent['serial_number'] = '-';
