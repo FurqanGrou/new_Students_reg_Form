@@ -26,7 +26,7 @@ class Subscribe extends Model
                 $created_at = Carbon::parse($subscribe->created_at)->timezone('Asia/Riyadh')->format('Y-m-d H:i:s');
                 $created_at_formatted = Carbon::parse($subscribe->created_at)->timezone('Asia/Riyadh')->format('Y-m-d');
 
-                $course = Course::query()->where('code', '=', 'new-students')->first();
+                $course = Course::query()->where('code', '=', 'new-students-warsh')->first();
                 $price = $course->price - ($subscribe->discount_value / 100);
 
                 $image_path = '-';
@@ -48,7 +48,7 @@ class Subscribe extends Model
                     $is_new = 'نعم';
                 }
 
-                if ($subscribe->form_type == 'new-students') {
+                if ($subscribe->form_type == 'new-students-warsh') {
                     $relation = 'newStudent';
                     $subscribe->newStudent['name'] = $subscribe->{$relation}->first_name . ' ' . $subscribe->{$relation}->father_name . ' ' . $subscribe->{$relation}->grandfather_name . ' ' . $subscribe->{$relation}->family_name;
                 }
@@ -116,7 +116,7 @@ class Subscribe extends Model
                     $is_new = 'نعم';
                 }
 
-                if ($subscribe->form_type == 'new-students') {
+                if ($subscribe->form_type == 'new-students-warsh') {
                     $relation = 'newStudent';
                     $subscribe->newStudent['name'] = $subscribe->{$relation}->first_name . ' ' . $subscribe->{$relation}->father_name . ' ' . $subscribe->{$relation}->grandfather_name . ' ' . $subscribe->{$relation}->family_name;
                 }
@@ -131,7 +131,7 @@ class Subscribe extends Model
                     $student_id_image = url(Storage::url($subscribe->{$relation}->student_id_image));
                 }
 
-                $course = Course::query()->where('code', '=', 'new-students')->first();
+                $course = Course::query()->where('code', '=', 'new-students-warsh')->first();
                 $price = $course->price - ($subscribe->discount_value / 100);
 
                 if ($subscribe->payment_method == 'checkout_gateway') {
