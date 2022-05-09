@@ -739,9 +739,9 @@
                                     <div class="col-12 text-right">
                                         <label for="preferred_language">{{ __('Preferred language') }}</label>
                                         <select name="preferred_language_studied" class="form-control" id="preferred_language">
-                                            <option {{ old('preferred_language_studied') == 'Arabic' || old('preferred_language_studied') == 'English' ? '' : 'selected' }}>{{ __('resubscribe.Choose') }}...</option>
-                                            <option value="Arabic" {{ old('preferred_language_studied') == 'Arabic' ? 'selected' : '' }}>{{ __('Arabic') }}</option>
-                                            <option value="English" {{ old('preferred_language_studied') == 'English' ? 'selected' : '' }}>{{ __('English') }}</option>
+                                            <option {{ old('preferred_language_studied') == __('Arabic') || old('preferred_language_studied') == __('English') ? '' : 'selected' }}>{{ __('resubscribe.Choose') }}...</option>
+                                            <option value="{{ __('Arabic') }}" {{ old('preferred_language_studied') == __('Arabic') ? 'selected' : '' }}>{{ __('Arabic') }}</option>
+                                            <option value="{{ __('English') }}" {{ old('preferred_language_studied') == __('English') ? 'selected' : '' }}>{{ __('English') }}</option>
                                         </select>
                                     </div>
 
@@ -886,8 +886,8 @@
                                         <label for="preferred_language">{{ __('Preferred language') }}</label>
                                         <select name="preferred_language" class="form-control" id="preferred_language">
                                             <option selected>{{ __('resubscribe.Choose') }}...</option>
-                                            <option value="Arabic">{{ __('Arabic') }}</option>
-                                            <option value="English">{{ __('English') }}</option>
+                                            <option value="{{ __('Arabic') }}">{{ __('Arabic') }}</option>
+                                            <option value="{{ __('English') }}">{{ __('English') }}</option>
                                         </select>
                                     </div>
 
@@ -1287,7 +1287,7 @@
 
 <!-- add frames script -->
 <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
-<script src="{{ asset('app.js') }}?v=69.25"></script>
+<script src="{{ asset('app.js') }}?v=640.5"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
